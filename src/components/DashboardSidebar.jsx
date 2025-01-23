@@ -9,12 +9,12 @@ import {
   SidebarMenuItem,
   SidebarMenuButton 
 } from "@/components/ui/sidebar";
-import { MessageSquare, User, Calendar, Search } from 'lucide-react';
+import { MessageSquare, CreditCard, MessageCircle, Star, Search, Calendar, User } from 'lucide-react';
 
 const channels = [
-  { id: 1, name: 'announcements', icon: MessageSquare },
-  { id: 2, name: 'project-gizmo', icon: MessageSquare },
-  { id: 3, name: 'team-marketing', icon: MessageSquare },
+  { id: 1, name: 'loan section', icon: CreditCard },
+  { id: 2, name: 'query section', icon: MessageCircle },
+  { id: 3, name: 'feedback section', icon: Star },
 ];
 
 const DashboardSidebar = () => {
@@ -64,8 +64,8 @@ const DashboardSidebar = () => {
               {channels.map((channel) => (
                 <SidebarMenuItem key={channel.id}>
                   <SidebarMenuButton asChild>
-                    <a href="#" className="flex items-center gap-2">
-                      <span className="text-gray-400">#</span>
+                    <a href="#" className="flex items-center gap-2 text-white">
+                      <channel.icon size={20} />
                       <span>{channel.name}</span>
                     </a>
                   </SidebarMenuButton>
