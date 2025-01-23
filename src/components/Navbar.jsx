@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const Navbar = () => {
+const Navbar = ({ onDashboardClick }) => {
   return (
     <motion.nav 
       initial={{ opacity: 0, y: -20 }}
@@ -21,7 +21,10 @@ const Navbar = () => {
             <a href="#solutions" className="text-gray-600 hover:text-primary transition-colors">Solutions</a>
             <a href="#team" className="text-gray-600 hover:text-primary transition-colors">Team</a>
             <a href="#contact" className="text-gray-600 hover:text-primary transition-colors">Contact</a>
-            <button className="bg-primary text-white px-6 py-2 rounded-full hover:bg-secondary transition-colors">
+            <button 
+              onClick={onDashboardClick}
+              className="bg-primary text-white px-6 py-2 rounded-full hover:bg-secondary transition-colors"
+            >
               Get Started
             </button>
           </div>
