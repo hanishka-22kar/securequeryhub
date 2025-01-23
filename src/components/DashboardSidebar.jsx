@@ -9,7 +9,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton 
 } from "@/components/ui/sidebar";
-import { MessageSquare, CreditCard, MessageCircle, Star, Search, Calendar, User } from 'lucide-react';
+import { CreditCard, MessageCircle, Star } from 'lucide-react';
 
 const channels = [
   { id: 1, name: 'loan section', icon: CreditCard },
@@ -25,38 +25,6 @@ const DashboardSidebar = () => {
           <h2 className="text-xl font-bold text-white mb-4">GuardAI</h2>
         </div>
         
-        <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <a href="#" className="flex items-center gap-2">
-                    <Search size={20} />
-                    <span>Search</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <a href="#" className="flex items-center gap-2">
-                    <Calendar size={20} />
-                    <span>Calendar</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <a href="#" className="flex items-center gap-2">
-                    <User size={20} />
-                    <span>Profile</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
         <SidebarGroup>
           <SidebarGroupLabel>Channels</SidebarGroupLabel>
           <SidebarGroupContent>
