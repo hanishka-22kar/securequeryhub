@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SidebarProvider } from "@/components/ui/sidebar";
 import DashboardSidebar from '../components/DashboardSidebar';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Star, ThumbsUp, ThumbsDown, MessageCircle, TrendingUp } from 'lucide-react';
+import { Star, ThumbsUp, ThumbsDown, MessageCircle, TrendingUp, LayoutDashboard } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
 const FeedbackDashboard = () => {
+  const navigate = useNavigate();
   const { toast } = useToast();
   const [newFeedback, setNewFeedback] = useState("");
   const [rating, setRating] = useState(0);
@@ -53,9 +55,19 @@ const FeedbackDashboard = () => {
         <DashboardSidebar />
         <main className="flex-1 bg-background p-6 overflow-y-auto">
           <div className="max-w-6xl mx-auto space-y-8">
-            <header className="flex items-center gap-3 mb-8">
-              <Star className="h-10 w-10 text-primary" />
-              <h1 className="text-3xl font-bold">Feedback Dashboard</h1>
+            <header className="flex items-center justify-between mb-8">
+              <div className="flex items-center gap-3">
+                <Star className="h-10 w-10 text-primary" />
+                <h1 className="text-3xl font-bold">Feedback Dashboard</h1>
+              </div>
+              <Button
+                onClick={() => navigate('/')}
+                variant="outline"
+                className="flex items-center gap-2"
+              >
+                <LayoutDashboard className="h-4 w-4" />
+                Overview Dashboard
+              </Button>
             </header>
 
             {/* Submit Feedback Section */}
