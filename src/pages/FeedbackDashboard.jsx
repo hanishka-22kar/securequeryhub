@@ -1,16 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SidebarProvider } from "@/components/ui/sidebar";
 import DashboardSidebar from '../components/DashboardSidebar';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Star, ThumbsUp, ThumbsDown, MessageCircle, TrendingUp } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 
 const FeedbackDashboard = () => {
+  const { toast } = useToast();
+  const [newFeedback, setNewFeedback] = useState("");
+  const [rating, setRating] = useState(0);
+
   const recentFeedback = [
     { type: 'positive', message: "Great customer service experience!", rating: 5, date: "2 hours ago" },
     { type: 'positive', message: "Quick loan approval process", rating: 4, date: "5 hours ago" },
     { type: 'negative', message: "App could be more user-friendly", rating: 3, date: "1 day ago" },
     { type: 'positive', message: "Very helpful support team", rating: 5, date: "2 days ago" },
   ];
+
+  const handleSubmitFeedback = (e) => {
+    e.preventDefault();
+    if (rating === 0) {
+      toast({
+        title: "Error",
+        description: "Please select a rating before submitting",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (!newFeedback.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter your feedback message",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    toast({
+      title: "Success",
+      description: "Thank you for your feedback!",
+    });
+    
+    setNewFeedback("");
+    setRating(0);
+  };
 
   return (
     <SidebarProvider>
@@ -22,6 +57,48 @@ const FeedbackDashboard = () => {
               <Star className="h-10 w-10 text-primary" />
               <h1 className="text-3xl font-bold">Feedback Dashboard</h1>
             </header>
+
+            {/* Submit Feedback Section */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle>Submit Your Feedback</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmitFeedback} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Rating</label>
+                    <div className="flex gap-2">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => setRating(star)}
+                          className="focus:outline-none"
+                        >
+                          <Star
+                            className={`h-6 w-6 ${
+                              star <= rating ? 'text-primary fill-primary' : 'text-gray-300'
+                            }`}
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Your Feedback</label>
+                    <Textarea
+                      value={newFeedback}
+                      onChange={(e) => setNewFeedback(e.target.value)}
+                      placeholder="Share your experience with us..."
+                      className="min-h-[100px]"
+                    />
+                  </div>
+                  <Button type="submit" className="w-full">
+                    Submit Feedback
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
 
             {/* Feedback Statistics */}
             <div className="grid gap-4 md:grid-cols-4">
